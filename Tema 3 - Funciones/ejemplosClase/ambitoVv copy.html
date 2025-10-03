@@ -1,0 +1,19 @@
+!DOCTYPE html>
+<html>
+<head>
+ <script>
+    //var x = 0 ; // Alcance global (var)
+    function cambia () { 
+        x = 1; // Alcance global tmb
+    }
+    cambia ();
+    alert ("Valor de x : " + x ); // Llama a la x original (1).
+    {
+        let x = 3 ; // Alcance de bloque (let)
+    }
+    alert ("Valor de x : " + x ); // Vuelve a llamar a la x original (1)
+  </script>
+</head>
+<body>
+</body>
+</html>

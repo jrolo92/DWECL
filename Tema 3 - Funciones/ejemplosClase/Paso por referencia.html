@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+      var objetoA = {a:1 , b : "Hola"}
+        function nombreFuncion (x) {
+          // código a ejecutar;
+          x.a = 3 ; // Para llamar a una de las características del objeto se usa el . (En este caso se va a modificar esa vv a 3)
+          return "Valor de x = " + x.a;
+        }
+	      alert ("Valor de a = " + objetoA.a ); // a -> 1 (Original)
+        alert (nombreFuncion(objetoA)); // Modifica la dirección de a -> 3
+        alert ("Valor de a = " + objetoA.a ); // a -> 3 (Se ha modificado el original, ya que es tipo primitivo).
+        </script>
+</head>
+<body>
+</body>
+</html>

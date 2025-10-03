@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <script>
+        var num;
+        //VV. que va a almacenar un dato de entrada del usuario
+        var opcion = prompt("¿Número de hijos?: ");
+
+        /*Mediante un if vamos a distinguir si el usuario mete un numero positivo o negativo
+          y en función de ésto vamos a mostrar el número o un mensaje de error.
+          Aprovechamos así la cualidad de JavaScript de cambiar el tipo de vv sobre la marcha.
+        */
+        if (opcion >= 0) {
+            num = opcion;
+            alert("Tienes " + num + " hijos.");
+        } else {
+            num = "No puedes tener menos de 0 hijos";
+            alert(num);
+        }
+
+    </script>
+</head>
+
+<body></body>
+
+</html>

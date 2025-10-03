@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarea 1</title>
+    <script>
+
+        function escogerFigura(){
+            var figura = prompt(
+                "Elige una figura: \n" + 
+                "1. Cubo \n" + 
+                "2. Esfera \n" + 
+                "3. Cilindro"
+            );
+
+            switch (figura){
+                case "1":
+                    figura="cubo"
+                    return figura;
+                    break;
+                case "2":
+                    figura="esfera"
+                    return figura;
+                    break;
+                case "3":
+                    figura="cilindro"
+                    return figura;
+                    break;
+                default:
+                    alert("Figura no valida");
+                    break;
+            }
+        }
+        
+        function solicitarMedidas(figura){
+            var lado;
+            var radio;
+            var altura;
+
+            switch(figura){
+                case "cubo": 
+                    lado = parseFloat(prompt("Introduzca lado del cubo (cm):"));
+                    return lado;
+                    break;
+                case "esfera":
+                    radio = parseFloat(prompt("Introduce el radio de la esfera (cm)"));
+                    return radio;
+                    break;
+                case "cilindro":
+                    radio = parseFloat(prompt("Introduce el radio del cilindro (cm)"));
+                    altura = parseFloat(prompt("Introduce la altura del cilindro (cm)"));
+                    return [radio, altura];
+                    break;
+                default:
+                    alert("Escoge una figura antes");
+                    break;
+            }
+
+        }
+
+        function calcularVolumen(figura, medida){
+            var volumen;
+            const PI = 3.141592653589793;
+
+            switch(figura){
+                case "cubo":
+                    volumen = Math.pow(medida, 3); // La potencia tambien se puede poner con: ** (medida ** 3 -> pondría el lado al cubo).
+                    alert("El volumen del cubo es: " + volumen.toFixed(3) + " cm³");
+                    break;
+                case "esfera":
+                    volumen = (4/3) * PI * Math.pow(medida, 3);
+                    alert("El volumen de la esfera es: " + volumen.toFixed(3) + " cm³");
+                    break;
+                case "cilindro":
+                    volumen = PI * Math.pow(medida[0], 2) * medida[1];
+                    alert("El volumen del cilindro es: " + volumen.toFixed(3) + " cm³");
+                    break;  
+                default:
+                    alert("Escoge una figura antes y dale valor/es a su/s parametro/s");
+                    break;
+            }
+        }
+
+        function calcularArea(figura, medida){
+            var area;
+            const PI = 3.141592653589793;
+
+            switch(figura){
+                case "cubo":
+                    area = 6 * Math.pow (medida, 2); 
+                    alert("El área del cubo es : " + area.tofixed(3) + " cm²");
+                    break;
+                case "esfera":
+                    area = 4 * PI * Math.pow(medida, 2);
+                    alert("El área de la esfera es: " + area.toFixed(3) + " cm²");
+                    break;
+                case "cilindro":
+                    // área total = 2 × π × r × (r + h)
+                    area = 2 * PI * medida[0] * (medida[0] + medida[1]);
+                    alert ("El área del cilindro es: " + area.toFixed(3) + " cm²");
+                    break;
+                default:
+                    alert("Escoge una figura antes y dale valor/es a su/s parametro/s");
+            }
+
+        }
+
+        function escogerOpcion(figura){
+            var opcion = prompt(
+                "Elige una opción: \n" + 
+                "1. Elija entre cubo, esfera o cilindro. \n" +
+                "2. Introduzca los valores de las variables. \n" +
+                "3. Cálculo de volumen. \n" +
+                "4. Cálculo de área.\n" +
+                "5. Finalizar."
+            );
+
+            switch (opcion){
+                case "1": 
+                    figura = escogerFigura();
+                    break;
+                case "2": 
+                    medida = solicitarMedidas(figura);
+                    break;
+                case "3":
+                    calcularVolumen(figura, medida);
+                    break;
+                case "4":
+                    calcularArea(figura, medida); 
+                    break; 
+                case "5":
+                    alert("Programa finalizado.");
+                    return 0; //Con el return 0 se va a salir de la pagina.
+                default:
+                    break;
+                }
+
+                escogerOpcion(figura);
+        }   
+
+        escogerOpcion();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
