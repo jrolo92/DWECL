@@ -1,5 +1,5 @@
-//Crea una web que solicite dos números y diga cuál es el mayor de ellos.
 
+<!-- Crea una web que solicite dos números y diga cuál es el mayor de ellos. -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,13 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio 1</title>
     <script>
+        // Creamos una vv para guardar el valor de cada uno de los números
         var num1 = prompt("Introduce un número");
         var num2 = prompt("Introduce otro número");
 
+        // Comprobamos cual es mayor y lo mostramos en ese orden 
         if (num1 > num2) {
             alert (num1 + " es mayor que " + num2)
         } else if (num1 == num2){
-            alert ("Ambos números son iguales")
+            alert ("Ambos números son iguales") // Tenemos en cuenta el caso en el que ambos números sean iguales
         } else {
             alert (num2 + " es mayor que " + num1)
         }

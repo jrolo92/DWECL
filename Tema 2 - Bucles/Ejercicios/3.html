@@ -1,3 +1,6 @@
+<!-- Crea una web que solicite tres números y si dichos números son todos menores a 100 y mayores que 10, 
+ muestre un mensaje de “Ok”, en caso contrario que muestre “No cumple”. -->
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,11 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio 3</title>
     <script>
+        // Solicitamos 3 números:
         var num1 = prompt("Introduce un número");
         var num2 = prompt("Introduce otro número");
         var num3 = prompt("Introduce otro número");
 
-        
+        // Si los números están entre 10 y 100 muestra "ok" y si no muestra mensaje de error:
+        if (num1 > 10 && num1 < 100 && num2 > 10 && num2 < 100 && num3 > 10 && num3 < 100){
+            alert("Ok")
+        } else {
+            alert("No cumple");
+        }
     </script>
 
 </head>

@@ -1,0 +1,15 @@
+<script>
+    var n = prompt("Introduzca un número : ");
+    try {
+        if (n == "") throw "está vacío";
+        if (isNaN(n)) throw "no es un número"; //Is nan comprueba si el valor es un número.
+        n = Number(n);
+        alert("Se ha introducido el número: " + n);
+    }
+    catch (err) {
+        alert("El valor " + err);
+    }
+    finally {
+        alert("Siempre se ejecuta"); //El finally se ejecuta siempre, haya error o no.
+    }
+</script>

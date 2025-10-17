@@ -1,0 +1,45 @@
+
+<!-- En una gestoría te solicitan que crees una web para calcular las primas de las nóminas, éstas funcionan según las siguientes reglas: 
+
+Si el empleado/a tiene un sueldo inferior a 750 € y su antigüedad es mayor o igual a 10 años, obtendrá una prima del 10% de su sueldo. 
+
+Si el empleado/a tiene sueldo superior o igual a 750 € y su antigüedad es mayor o igual a 10 años, obtendrá una prima del 5% de su sueldo.
+
+Si su antigüedad es menor a 10 años, no obtendrá ninguna prima. 
+
+Tras realizar la prima mensual, se deberá mostrar un mensaje con el valor final (sueldo + prima). Para adquirir sueldo y antigüedad, pregúntalo al usuario/a. -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4</title>
+    <script>
+        
+        // Creamos las vv necesarios para los cálculos que se nos piden.
+        var sueldo = parseFloat(prompt("Introduzca sueldo: "));// Ya que prompt nos va a devolver un string hacemos la conversion que necesitamos --> Permitimos que el sueldo tenga decimales
+        var antiguedad = parseInt(prompt("Introduzca su antiguedad (en años): "));// Aquí también hacemos la conversión a entero.
+        var prima;
+        var valorFinal;
+
+        //Comprobamos las distintas condiciones que se nos piden y devolvemos el cálculo de la prima correspondiente en cada caso
+        if (sueldo < 750 && antiguedad >=10){
+            prima = sueldo * 0.10;
+        } else if (sueldo >= 750 && antiguedad >=10){
+            prima = sueldo * 0.05;
+        } else if (antiguedad < 10){
+            prima = 0;
+        }
+
+        // Sumamos la prima al sueldo inicial y mostramos el valor final total.
+        valorFinal = sueldo + prima;
+        alert("Su sueldo es de " + sueldo + " €, con una prima de " + prima + 
+        " €. Por tanto, le correspondería un total de " + valorFinal + " €.");
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

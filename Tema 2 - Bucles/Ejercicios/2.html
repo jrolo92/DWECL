@@ -1,3 +1,5 @@
+
+<!-- Crea una web que solicite un número, a continuación deberá mostrarse un mensaje diciendo si el número introducido es par o es impar.  -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,13 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio 2</title>
     <script>
-        var num1 = prompt("Introduce un número");
+        // Solicitamos un número y nos aseguramos de que sea entero.
+        var num1 = parseInt(prompt("Introduce un número"));
 
+        // Calculamos si el numero es par o no y lo mostramos
         if (num1 % 2 == 0){
             alert ("El número es par")
         } else  {
             alert ("El número es impar")
         }
+        
     </script>
 </head>
 <body>

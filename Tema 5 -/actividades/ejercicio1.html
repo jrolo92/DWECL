@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+    <script>
+
+        function introducirValores() {
+            var valores = [];
+            var opcion;
+            var i = 0; //Vamos a usar un contador para guardar los valores del usuario en el orden correcto
+
+            do {
+                opcion = prompt("Introduce un número: ");
+                if (opcion !== "f") {
+                    valores[i] = parseFloat(opcion); // Para que no pille los valores como Strings si no como números.
+                    i++;
+                }
+            } while (opcion !== "f");
+
+            console.log(valores); // Comprobamos que se guardan los valores en el array
+
+            calcularMedia(valores);
+            calcularRango(valores);
+            calcularModa(valores);
+            calcularMediana(valores);
+            
+        }
+
+        function calcularMedia(valores) {
+            var suma = 0;
+            for (var i = 0; i < valores.length; i++) {
+                suma += valores[i];
+            }
+
+            alert("la suma de valores es: " + suma);
+            var media = suma / valores.length;
+
+            alert("la media es: " + media);
+        }
+
+        function calcularRango(valores) {
+            var valorMax = valores[0];
+            var valorMin = valores[0];
+
+            for (i = 0; i < valores.length; i++) {
+                if (valores[i] > valorMax) {
+                    valorMax = valores[i];
+                }
+                if (valores[i] < valorMin) {
+                    valorMin = valores[i];
+                }
+            }
+
+            var rango = valorMax - valorMin;
+
+            console.log(rango);
+
+            alert("El rango es: " + rango);
+        }
+
+        function calcularModa(valores) {
+            var modas = [];
+            var frecuencias = []; // Aquí vamos a guardar cuantas veces aparece cada número
+            var frecuenciaMax = 0; // Aquí vamos a guardar la frecuencia mas alta que se encuentre
+
+            // Recorremos el array y contamos la frecuencia de cada valor: 
+            for (var i = 0; i < valores.length; i++) {
+                var v = valores[i]; // Vamos a ir guardando el valor de cada vuelta en una nueva vv
+                if (frecuencias[v]) {
+                    frecuencias[v]++; // Si ya existe le sumamos 1 al contador
+                } else {
+                    frecuencias[v] = 1; // si es la primera vez que aparece le ponemos 1
+                }
+                if (frecuencias[v] > frecuenciaMax) {
+                    frecuenciaMax = frecuencias[v]; // Si encontramos una frecuencia mayor, actualizamos la frecuencia máxima
+                }
+            }
+
+            // Calculamos las modas en funcion de las frecuencias de repetición de cada valor
+            var contador = 0;
+            for (var i = 0; i < frecuencias.length; i++) {
+                var frec = frecuencias[i]; // Vamos a ir guardando la frecuencia de cada vuelta en una nueva vv
+                if (frec === frecuenciaMax) {
+                    modas[contador] = i;    // Si la frecuencia es igual que la frecuencia máxima esa es la moda
+                    contador++;             // Se aumenta el contador para que si hay otra moda, ésta se guarde en la siguiente posición del array
+                }
+            }
+
+            console.log(modas);
+
+            // Evaluar los casos
+            if (modas.length === 1) {
+                alert("La moda es única: " + modas[0]); // Cuando solo tenemos una moda.
+            } else if (modas.length === 2) {                                                        // En caso de que haya mas de una moda 
+                if (modas[0] - modas[1] === 1 || modas[0] - modas[1] === -1) {                      // Comprobamos que sean consecutivos si al restarlos se obtiene 1 o -1
+                    var mediaConsecutiva = (modas[0] + modas[1]) / 2;                               // Realizamos la media de ambas y la mostramos
+                    alert("Las modas son consecutivas. La moda es la media: " + mediaConsecutiva); 
+                } else {
+                    alert("Hay dos modas: " + modas[0] + ", " + modas[1]);                          // si no son consecutivos muestra los dos valores separados por una coma
+                }
+            } else {
+                alert("No hay ninguna moda");
+            }
+
+        }
+
+        // Ampliación ejercicio 1 tema 5 parte A
+        function calcularMediana (valores){
+            // alert(valores.sort());
+            valores.sort((a,b) => a-b); //Ordenamos de menor a mayor los valores introducidos por el usuario.
+            console.log(valores);
+            if(valores.length % 2 !== 0){
+                var indiceImpar = valores.length/2-0.5;
+                alert(valores[indiceImpar]);
+            } else {
+                var indicePar = valores.length/2-1;
+                var indiceParSegundo = indicePar + 1;
+                alert("La mediana es: " + valores[indicePar] + " , " + valores[indiceParSegundo]);
+            }
+        }
+
+        introducirValores();
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

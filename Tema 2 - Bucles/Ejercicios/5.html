@@ -1,0 +1,34 @@
+<!-- Crea una web que solicite tres números y los muestre de menor a mayor.  -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5</title>
+    <script>
+        // Creamos 3 vv para guardar los números solicitados al usuario
+        var num1 = prompt("Introduce un número");
+        var num2 = prompt("Introduce otro número");
+        var num3 = prompt("Introduce otro número");
+
+        // Comparamos todos los casos posibles para ordenar los valores y los mostramos ordenados
+        if (num1 > num2 && num2>num3){
+            alert (num1 + " " + num2 + " " + num3);
+        } else if (num1 > num3 && num3 > num2){
+            alert (num1 + " " + num3 + " " + num2);
+        } else if (num2 > num1 && num1 > num3){
+            alert (num2 + " " + num1 + " " + num3);
+        } else if (num2 > num3 && num3 > num1){
+            alert (num2 + " " + num3 + " " + num1);
+        } else if (num3 > num1 && num1 > num2){
+            alert (num3 + " " + num1 + " " + num2);
+        } else if (num3 > num2 && num2 > num1){
+            alert (num3 + " " + num2 + " " + num1);
+        }
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
