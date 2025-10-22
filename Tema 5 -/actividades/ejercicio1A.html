@@ -1,0 +1,41 @@
+<!--Realizar un script JS que realice las siguientes operaciones:
+
+Solicite una serie de valores y los guarde en una matriz o array de dos dimensiones (para cualquier número de filas y columnas)  mediante una función. 
+A continuación, en otra función, tomará esos valores y va a separar los números pares de los impares guardando cada grupo en un array simple.
+Debe mostrar ambos arrays en una ‘alert ()’-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1A - Tema 5</title>
+    <script>
+        function introducirValores (){
+            var valores = [];
+            var i = 0;
+            var j = 1;
+            var k = 0;
+            do {
+                var opcion = prompt("Introduzca un número. Pulse 'c' para insertar nueva fila o pulse 'f' para terminar");               
+                    valores[i] = parseFloat(opcion);
+                    i ++;
+                if (opcion == "c"){
+                    opcion = prompt("Introduzca un número. Pulse 'c' para insertar nueva fila o pulse 'f' para terminar");
+                    var j = 1;
+                    valores[j][k] = parseFloat(opcion);
+                    j ++;
+                    k ++;
+                }
+            } while (opcion !== "f");
+
+            console.log(valores);
+            return valores;
+        }
+
+        introducirValores();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
