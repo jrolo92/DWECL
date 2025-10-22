@@ -3,6 +3,7 @@
 Solicite una serie de valores y los guarde en una matriz o array de dos dimensiones (para cualquier número de filas y columnas)  mediante una función. 
 A continuación, en otra función, tomará esos valores y va a separar los números pares de los impares guardando cada grupo en un array simple.
 Debe mostrar ambos arrays en una ‘alert ()’-->
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,20 +12,18 @@ Debe mostrar ambos arrays en una ‘alert ()’-->
     <title>Ejercicio 1A - Tema 5</title>
     <script>
         function introducirValores (){
-            var valores = [];
-            var i = 0;
-            var j = 1;
-            var k = 0;
+            var valores = []; //Inicializamos un array vacío donde vamos a guardar los valores insertados por el usuario
+            var i = 0; // Contador que vamos a usar para distinguir las filas
+            valores[i] = []; // Inicializamos la primera fila del array donde vamos a guardar los valores.
+
             do {
-                var opcion = prompt("Introduzca un número. Pulse 'c' para insertar nueva fila o pulse 'f' para terminar");               
-                    valores[i] = parseFloat(opcion);
-                    i ++;
+                var opcion = prompt("Introduzca un número. Pulse 'c' para insertar nueva fila o pulse 'f' para terminar");
+                var numero = parseInt(opcion); // Pasamos el prompt de String a entero y lo guardamos en otra vv              
                 if (opcion == "c"){
-                    opcion = prompt("Introduzca un número. Pulse 'c' para insertar nueva fila o pulse 'f' para terminar");
-                    var j = 1;
-                    valores[j][k] = parseFloat(opcion);
-                    j ++;
-                    k ++;
+                    i ++; // Nos va a permitir el cambio de fila cada vez que el user pulse c
+                    valores[i] = []; // Inicializamos nueva fila cada vez que el user pulse c
+                } else if (opcion != "f"){
+                    valores[i].push(numero); // Cada vez que meta un número (y no sea 'c' ni 'f' se van a añadir a la línea correspondiente)
                 }
             } while (opcion !== "f");
 
@@ -32,7 +31,27 @@ Debe mostrar ambos arrays en una ‘alert ()’-->
             return valores;
         }
 
-        introducirValores();
+        function parOImpar(valores){
+            //Creamos dos arrays
+            var arrayPar = [];
+            var arrayImpar = [];
+            
+            for (i=0; i<valores.length; i++){               // Este bucle nos va a recorrer las filas una a una.
+                for (j=0; j<valores[i].length; j++){        // Con este bucle vamos a recorrer el contenido de cada celda de la fila en la que nos encontremos
+                    if (valores[i][j] % 2 == 0){
+                        arrayPar.push(valores[i][j]);       // Cuando el contenido de cada celda sea par lo va a incluir en el array de pares
+                    } else {
+                        arrayImpar.push(valores[i][j]);     // Cuando el contenido de cada celda sea impar lo va a incluir en el array de impares
+                    }
+                }
+            }
+            return alert("Los pares son: " + arrayPar + "\n Los impares son: " + arrayImpar); // Devuelve un alert con el contenido de ambos arrays
+        }
+
+        var array = introducirValores(); // Guardo los valores en una nueva vv para poder pasarselos a la siguiente función
+        console.log(array);
+        parOImpar(array);
+
     </script>
 </head>
 <body>
