@@ -14,14 +14,14 @@ Debe mostrar ambos arrays en una ‘alert ()’-->
         function introducirValores (){
             var valores = []; //Inicializamos un array vacío donde vamos a guardar los valores insertados por el usuario
             var i = 0; // Contador que vamos a usar para distinguir las filas
-            valores[i] = []; // Inicializamos la primera fila del array donde vamos a guardar los valores.
+            valores[i] = []; // IMPORTANTE: Inicializamos la primera fila del array donde vamos a guardar los valores.
 
             do {
                 var opcion = prompt("Introduzca un número. Pulse 'c' para insertar nueva fila o pulse 'f' para terminar");
                 var numero = parseInt(opcion); // Pasamos el prompt de String a entero y lo guardamos en otra vv              
                 if (opcion == "c"){
                     i ++; // Nos va a permitir el cambio de fila cada vez que el user pulse c
-                    valores[i] = []; // Inicializamos nueva fila cada vez que el user pulse c
+                    valores[i] = []; // IMPORTANTE: Inicializamos nueva fila cada vez que el user pulse c
                 } else if (opcion != "f"){
                     valores[i].push(numero); // Cada vez que meta un número (y no sea 'c' ni 'f' se van a añadir a la línea correspondiente)
                 }
@@ -37,7 +37,7 @@ Debe mostrar ambos arrays en una ‘alert ()’-->
             var arrayImpar = [];
             
             for (i=0; i<valores.length; i++){               // Este bucle nos va a recorrer las filas una a una.
-                for (j=0; j<valores[i].length; j++){        // Con este bucle vamos a recorrer el contenido de cada celda de la fila en la que nos encontremos
+                for (j=0; j<valores[i].length; j++){        // IMPORTANTE: Con este bucle vamos a recorrer el contenido de cada celda de la fila en la que nos encontremos
                     if (valores[i][j] % 2 == 0){
                         arrayPar.push(valores[i][j]);       // Cuando el contenido de cada celda sea par lo va a incluir en el array de pares
                     } else {
@@ -45,7 +45,7 @@ Debe mostrar ambos arrays en una ‘alert ()’-->
                     }
                 }
             }
-            return alert("Los pares son: " + arrayPar + "\n Los impares son: " + arrayImpar); // Devuelve un alert con el contenido de ambos arrays
+            return alert("Los pares son: " + arrayPar + "\nLos impares son: " + arrayImpar); // Devuelve un alert con el contenido de ambos arrays
         }
 
         var array = introducirValores(); // Guardo los valores en una nueva vv para poder pasarselos a la siguiente función

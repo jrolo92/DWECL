@@ -1,0 +1,58 @@
+<!-- 
+    Introduce temperatura en ºC de: 
+    Seccion 0 Maquina 0 Sensor 0
+-->
+<!-- temperaturas = [[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]],[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]]] -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script>
+        function introducirTemperaturas(){
+            var temperaturas= [];
+            // var indice = 0;
+            for (var i=0; i<2; i++){
+                temperaturas[i] = [];
+                for (var j=0; j<3; j++){
+                    temperaturas[i][j] = [];
+                    for (var k=0; k<5; k++){
+                        var temperatura = parseFloat(prompt(`Introduce temperatura (ºC): \nSección ${i}, Máquina ${j}, Sensor ${k}:`));
+                        temperaturas[i][j][k] = temperatura;
+                    }
+                }
+            }
+
+            console.log(temperaturas);
+            return temperaturas;
+        }
+
+        function calcularMedias(temperaturas){
+            var suma = 0;
+            var media = 0.00;
+            for (var i=0; i<2; i++){
+                for (var j=0; j<3; j++){
+                    for (var k=0; k<5; k++){
+                        suma += temperaturas[i][j][k];
+                    }
+                    media = suma / 5;
+                    var mensaje = alert(`Temperatura Media de [Sección ${i}, Máquina ${j}]: ${media}`);
+                }
+            }
+            console.log(mensaje);
+            return mensaje;
+        }
+
+        var temp = introducirTemperaturas();
+        calcularMedias(temp);
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
