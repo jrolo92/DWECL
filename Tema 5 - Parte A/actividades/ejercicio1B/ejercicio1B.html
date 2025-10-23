@@ -1,9 +1,3 @@
-<!-- 
-    Introduce temperatura en ºC de: 
-    Seccion 0 Maquina 0 Sensor 0
--->
-<!-- temperaturas = [[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]],[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]]] -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,14 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <script>
+    /* 
+        El array con el que vamos a trabajar se visualizaría así: 
+        temperaturas = [[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]],[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]]] 
+    */
+
         function introducirTemperaturas(){
-            var temperaturas= [];
-            // var indice = 0;
-            for (var i=0; i<2; i++){
-                temperaturas[i] = [];
-                for (var j=0; j<3; j++){
-                    temperaturas[i][j] = [];
-                    for (var k=0; k<5; k++){
+            var temperaturas= [];                   // Creamos un array para ir almacenando la tª de cada sensor
+            for (var i=0; i<2; i++){                // Tenemos dos secciones en la fábrica
+                temperaturas[i] = [];               // Inicializamos la segunda dimensión dentro del primer array
+                for (var j=0; j<3; j++){            // Tenemos 3 máquinas por cada sección
+                    temperaturas[i][j] = [];        // Inicializamos la tercera dimensión dentro del segundo array
+                    for (var k=0; k<5; k++){        // Tenemos 5 sensores por cada máquina
+                        /* 
+                        El usuario va a introducir la tª de cada sensor. En el prompt se va a indicar la sección, máquina y sensor actual
+                        Guardamos el valor de esa temperatura en el array temperaturas (en la 3ª dimensión -> corresponde a los sensores)
+                        */
                         var temperatura = parseFloat(prompt(`Introduce temperatura (ºC): \nSección ${i}, Máquina ${j}, Sensor ${k}:`));
                         temperaturas[i][j][k] = temperatura;
                     }
@@ -26,28 +28,108 @@
             }
 
             console.log(temperaturas);
-            return temperaturas;
+
+            // Vamos a lanzar las demás funciones desde aquí mismo para no crear vv globales
+            calcularMedias(temperaturas);
+            maximoPorSeccion(temperaturas);
+            detectarSobrecalentamientos(temperaturas);
         }
 
         function calcularMedias(temperaturas){
-            var suma = 0;
             var media = 0.00;
+
+            // Vamos a recorrer todo el array para recuperar los valores de la tª de los sensores
             for (var i=0; i<2; i++){
                 for (var j=0; j<3; j++){
+                    var suma = 0.00;                                                      // Cada vez que cambie de máquina se resetea la suma de las tª a 0
                     for (var k=0; k<5; k++){
-                        suma += temperaturas[i][j][k];
+                        suma += temperaturas[i][j][k];                                    // En la vv suma vamos a ir sumando los valores de la tª de los sensores
                     }
-                    media = suma / 5;
-                    var mensaje = alert(`Temperatura Media de [Sección ${i}, Máquina ${j}]: ${media}`);
+                    media = suma / 5;                                                     // Dividimos el total de la suma entre 5 sensores
+                    alert(`Temperatura Media de [Sección ${i}, Máquina ${j}]: ${media}`); // El mensaje se va a repetir para cada máquina mostrando su sección, máquina y media
                 }
             }
-            console.log(mensaje);
-            return mensaje;
         }
 
-        var temp = introducirTemperaturas();
-        calcularMedias(temp);
+        function maximoPorSeccion(temperaturas){
+            // Recorremos el array completo
+            for(var i=0; i<temperaturas.length; i++){
+                var tempMax = 0;                                        // Cada vez que cambie de sección se va a reiniciar la tª máxima
+                for (var j=0; j<temperaturas[i].length; j++){
+                    for (var k=0; k<temperaturas[i][j].length; k++){    // Una vez que estamos ya a nivel de los sensores
+                        if (temperaturas[i][j][k] > tempMax){           // Si el valor de un sensor es mayor que la tª mas alta (cuando inicie será 0)
+                            tempMax = temperaturas[i][j][k];            // Vamos a guardar ese valor en la vv tempMax
+    
+                        }
+                    }
+                }
+                alert (`La tª máxima del sector ${i} es: ${tempMax}ºC.`);
+            }
+        }
 
+        // VERSIÓN 2 de la función maximoPorSeccion():
+        // function maximoPorSeccion(temperaturas){
+        //     var tempMax1 = 0;
+        //     var tempMax2 = 0;
+
+        //     // Creamos un array 1D. Recorremos todo el array 3D y vamos metiendo cada valor en el array 3D
+        //     var temp1D = [];
+        //     for (var i=0; i<2; i++){
+        //         for (var j=0; j<3; j++){
+        //             for (var k=0; k<5; k++){
+        //                 temp1D.push(temperaturas[i][j][k]);
+        //             }
+        //         }
+        //     }
+        //     console.log(temp1D);
+            
+        //     /* 
+        //         Dividimos el array 1D con todos los valores por secciones (los 15 primeros valores pertenecen a la sección 1 y los otros 15 a la sección 2)
+        //         Cada seción la vamos a guardar en un array nuevo.
+        //     */
+        //     var tempSeccion1 = temp1D.slice(0,15);
+        //     var tempSeccion2 = temp1D.slice(15);
+
+        //     console.log(tempSeccion1);
+        //     console.log(tempSeccion2);
+
+        //     // Recorremos el array (de cada sección) y cada vez que haya un valor mayor que el anterior se guardará en la vv tempMax
+        //     for (i=0; i<tempSeccion1.length; i++){
+        //         if (tempSeccion1[i] > tempMax1){
+        //             tempMax1 = tempSeccion1[i];
+        //         }
+        //     }
+
+        //     for (i=0; i<tempSeccion2.length; i++){
+        //         if (tempSeccion2[i] > tempMax2){
+        //             tempMax2 = tempSeccion2[i];
+        //         }
+        //     }
+
+        //     console.log(tempMax1);
+        //     console.log(tempMax2);
+
+        //     // Devuelve la tª de cada sección:
+        //     return alert(`La tª máxima de la sección 1 es: ${tempMax1}ºC. \nLa tª máxima de la sección 2 es: ${tempMax2}ºC.`);
+
+        // }
+
+        function detectarSobrecalentamientos(temperatura){
+            
+            for (var i=0; i<temperatura.length; i++){
+                for (var j=0; j<temperatura[i].length; j++){
+                    for (var k=0; k<temperatura[i][j].length; k++){
+                        if (temperatura[i][j][k] > 100){
+                            var sobreCalentado = temperatura[i][j][k];
+                            alert(`ALERTA \n La temperatura del sector ${i}, máquina ${j}, sensor ${k} es de ${sobreCalentado}ºC \n Sobrepasa los límites recomendados.`)
+                        }
+                    }
+                }
+            }
+        }
+
+        //Iniciamos el programa:
+        introducirTemperaturas();
 
     </script>
 </head>
