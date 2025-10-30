@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function entradaNotas(){
+            var notas= [];
+            var criterio = 1;
+            notas [criterio] = [];
+            do{
+                var opcion = prompt(`Introduce las notas del criterio ${criterio}: `);
+                var número = parseFloat(opcion);
+                if (opcion == s){
+                    criterio ++;
+                } else if (opción !== f){
+                    notas[criterio].push(numero);
+                }
+            } while (opcion !==f);
+
+            return notas;
+        }
+
+        // notas= [[0,0,0],[0,0,0]]
+        function calculoMedias(notas){
+            for (var i=0; i<notas.length; i++){
+                var suma = 0.00;
+                for (var j; j<notas[i].length; j++){
+                suma += notas[i][j];
+                }
+                media = suma / notas[i][j].length;
+            }
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
