@@ -5,36 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio 2 - Tema 5 (Parte B)</title>
     <script>
+        /*
+            Muestra un menú con distintas opciones de gestion de una cesta de la compra.
+        */
         function menu(){
+            // Los artículos de la cesta serán un array de objetos con las propiedades id, nombre, precio y cantidad.
+            var id = 0;
             var articulos = [];
-            var articulo = {id:0 , nombre:"", precio:0.00, cantidad:0}
-            articulos.push(articulo);
+            /*
+                Vamos a preguntar al usuario la opción (para cada una usamos una función) 
+                y el menú se repetirá hasta que el usuario pulse 5 mediante el loop do...while
+            */
             do{
-            var opcion = prompt("Seleccione opción: \n 1.Ver cesta. \n 2. Insertar un artículo. \n 3. Borrar un artículo. \n 4. Vaciar cesta. \n 5. Salir");
+            var opcion = parseInt(prompt("Seleccione opción: \n 1.Ver cesta. \n 2. Insertar un artículo. \n 3. Borrar un artículo. \n 4. Vaciar cesta. \n 5. Salir"));
             switch (opcion){
                 case 1: verCesta(articulos);
-                case 2: ;
-                case 3: ;
-                case 4: ;
-                case 5: ;
+                        break;
+                case 2: id ++;
+                        insertarArticulo(articulos, id);
+                        break;
+                case 3: var codigo = parseInt(prompt("Introduce el id del artículo a eliminar:"));
+                        eliminarArticulo(articulos, codigo);
+                        break;
+                case 4: vaciarCesta(articulos);
+                        break;
+                case 5: break;
                 default: ;
             }
             } while (opcion !== 5);
         }
 
         function verCesta(articulos){
-            <tr>
-                <td>
-                    
-                </td>    
-            </tr>
 
+            var mensaje = "Codigo  |  Nombre  |  Precio  |  Cantidad  |  Subtotal\n";     // Mostramos la tabla con este formato
+            var total = 0;
+            /* 
+            Recorremos el array de objetos para obtener el subtotal y el total.
+            Finalmente mostramos cada propiedad del objeto + el total y el subtotal.
+            */
+            for (var i = 0; i < articulos.length; i++) {                        
+                var subtotal = articulos[i].precio * articulos[i].cantidad;
+                total += subtotal;
+                mensaje += `${articulos[i].id}           |  ${articulos[i].nombre}         |  ${articulos[i].precio}         |  ${articulos[i].cantidad}          |  ${subtotal}\n`;
+            }
+            mensaje += `Total: ${total}`;
+            alert(mensaje); 
         }
 
-        function insertarArticulo(){
 
+        function insertarArticulo(articulos, id){
+            // Pedimos nombre, cantidad y precio del articulo a insertar.
+            var nombre = prompt("Nombre del artículo: ");
+            var cantidad = parseInt(prompt("Cantidad de artículos: "));
+            var precio = parseFloat(prompt("Precio por artículo: "));
+            var articulo = {id:id, nombre:nombre, cantidad:cantidad, precio:precio}; // Guardamos el nuevo artículo a insertar y lo añadimos a nuestro array de artículos
+            articulos.push(articulo);
+            alert("Artículo añadido.")
+            return articulos;
         }
 
+        function eliminarArticulo(articulos, codigo){
+            // Busca el artículo con el id = al código introducido por el usuario en el menú y lo borra.
+            for (var i=0; i<articulos.length; i++){
+                if (articulos[i].id === codigo){
+                    articulos.splice(i,1);   // splice -> En los argumentos le decimos que elimine 1 artículo a partir del artículo cuyo id es el que se quiere borrar.
+                    alert ("Artículo eliminado.")
+                    break;
+                }
+            }
+        }
+
+        function vaciarCesta(articulos) {
+            articulos.length = 0;               // Eliminamos todos los artículos poniéndole una longitud de 0 a nuestro array de artículos.
+            alert("La cesta ha sido vaciada.");
+        }
+        
+        menu();
 
     </script>
 </head>
