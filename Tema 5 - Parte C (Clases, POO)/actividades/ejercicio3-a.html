@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3 - Apartado A - Tema 5 (Parte C) </title>
+    <script> 
+        // Clase padre:
+        class Empleado {
+            // Atributos:
+            nombre;
+            apellido;
+            #edad;
+
+            // Constructor
+            constructor(nombre, apellido, edad){
+                this.nombre = nombre;
+                this.apellido = apellido;
+                this.#edad = edad;
+            }
+
+            // Método que devuelve los tres atributos:
+            muestra(){
+                return "Nombre: " + this.nombre + ". Apellidos: " + this.apellido + ". Edad: " + this.#edad;
+            }
+        }
+
+        // Clase hija:
+        class Profesor extends Empleado {
+            // Atributo
+            cargo;
+
+            // Constructor
+            constructor(nombre, apellidos, edad, cargo){
+                super(nombre, apellidos, edad);             // Hereda los atributos de la clase padre
+                this.cargo = cargo;
+            }
+
+            // Método que devuelve el cargo:
+            muestraCargo(){
+                return "Cargo: " + this.cargo;
+            }
+        }
+
+        // Creamos una instancia de profesor:
+        var profe1 = new Profesor ("Javier", "Rodríguez", 32, "Tutor");
+
+        // Llamamos a los métodos y los mostramos con un alert:
+        alert(profe1.muestra());
+        alert(profe1.muestraCargo());
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

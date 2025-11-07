@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3.B - Tema 5 (Parte C)</title>
+    <script>
+        class Articulo {
+            // Atributos:
+            #art = {};
+
+            // Constructor:
+            constructor(codigo, nombre, cantidad, precio){
+                this.#art.codigo = codigo;
+                this.#art.nombre = nombre;
+                this.#art.cantidad = cantidad;
+                this.#art.precio = precio;
+                return this.#art;                   // Cada vez que se use el contructor te devuelve el objeto ya instanciado.
+            }
+        }
+
+        class Cesta {
+            // Va a tener una vv de tipo array que guarde articulos.
+            #articulosCesta = [];
+            #contadorId = 0;
+
+            // Métodos
+            insertarArticulo(){
+                this.#contadorId ++;  // El código de cada objeto que añadamos se va a ir aumentando automáticamente.
+                // Pedimos al usuario que introduzca los datos necesarios para crear un nuevo artículo.
+                var nombre = prompt("Nombre del artículo: ");
+                var cantidad = parseInt(prompt("Cantidad de artículos: "));
+                var precio = parseFloat(prompt("Precio por artículo: "));
+                // Añadimos los datos y el id (mediante el contadorId) a un nuevo objeto de tipo articulo. Y se lo pusheamos al array de cesta
+                var articulo = new Articulo (this.#contadorId, nombre, cantidad, precio);
+                this.#articulosCesta.push(articulo);
+                alert("Artículo añadido.");
+            }
+
+            eliminarArticulo(){
+                // Pedimos el id del producto al usuario.
+                var codigo = parseInt(prompt("Introduce el código del producto a eliminar"));
+                // Recorremos el array de artículosCesta y cuando los id coincidan se va a eliminar ese artículo.
+                for (var i=0; i<this.#articulosCesta.length; i++){
+                    if (this.#articulosCesta[i].codigo === codigo){
+                        this.#articulosCesta.splice(i,1);   // splice -> En los argumentos le decimos que elimine 1 artículo a partir del artículo cuyo id es el que se quiere borrar.
+                        alert ("Artículo eliminado.");
+                        break;
+                    }
+                }
+            }
+
+            verCesta(){
+                if (this.#articulosCesta.length == 0){  // Si el array tiene longitud 0, dará un mensaje de cesta vacía.
+                    alert ("La cesta está vacía")
+                }else {
+                    var tabla = "Codigo  |  Nombre  |  Precio  |  Cantidad  |  Subtotal\n";     // Mostramos la tabla con este formato y con el salto de línea al final
+                    var total = 0;
+                    /* 
+                    Recorremos el array de objetos para obtener el subtotal y el total.
+                    Finalmente mostramos cada propiedad del objeto + el total y el subtotal.
+                    */
+                    for (var i = 0; i < this.#articulosCesta.length; i++) {
+                        var art = this.#articulosCesta[i];
+                        var subtotal = art.precio * art.cantidad;
+                        total += subtotal;
+                        // Añadimos a la tabla el valor de cada atributo de artículo después del salto de línea y le damos un nuevo salto al final.
+                        tabla += `${art.codigo} | ${art.nombre} | ${art.precio} | ${art.cantidad} | ${subtotal}\n`;
+                    }
+                    // Por último añadimos el total seguido tras el salto de línea. De esta manera obtenemos una especie de tabla con 3 filas.
+                    tabla += "Total: " + total;
+                    alert(tabla);
+                }
+            }
+
+            vaciarCesta(){
+                this.#articulosCesta.length = 0;               // Eliminamos todos los artículos poniéndole una longitud de 0 a nuestro array de objetos.
+                alert("La cesta ha sido vaciada.");
+            }
+        }
+
+        class Menu {
+            //Atributos:
+            #cesta = {};
+
+            constructor(){
+                this.#cesta = new Cesta();
+            }
+
+            // Métodos:
+            // Pide al usuario que escoja entre varias opciones y en función de lo escogido ejecuta un método de la clase Cesta.
+            verMenu(){
+                do{
+                    var opcion = parseInt(prompt("Seleccione opción: \n 1.Ver cesta. \n 2. Insertar un artículo. \n 3. Borrar un artículo. \n 4. Vaciar cesta. \n 5. Salir"));
+                    switch (opcion){
+                        case 1: this.#cesta.verCesta();
+                                break;
+                        case 2: this.#cesta.insertarArticulo();
+                                break;
+                        case 3: this.#cesta.eliminarArticulo();
+                                break;
+                        case 4: this.#cesta.vaciarCesta();
+                                break;
+                        case 5: break;
+                        default: ;
+                    }
+                } while (opcion !== 5);
+            }
+        }
+
+        // La clase menú crea una instancia de cesta vacía con la cual vamos a ir realizando las tareas
+        menu = new Menu();
+        menu.verMenu();
+
+
+
+        // // Comprobaciones previas a la creación de la clase menú.
+        // var cesta = new Cesta();
+        // cesta.insertarArticulo();
+        // cesta.insertarArticulo();
+        // cesta.verCesta();
+        // cesta.eliminarArticulo();
+        // cesta.verCesta();
+        // cesta.vaciarCesta();
+        // cesta.verCesta();
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
