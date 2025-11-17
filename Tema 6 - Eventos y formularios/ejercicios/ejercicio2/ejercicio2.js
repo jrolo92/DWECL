@@ -15,6 +15,7 @@ class Sesion {
     }
 
     /*
+        Creamos los controladores de eventos.
         Método que va a estar preparado para disparar otros métodos cuando se cumplan ciertos eventos
     */
     #fEvento(){
@@ -23,7 +24,7 @@ class Sesion {
         password.addEventListener('keyup', ()=> this.#validarPassword());
         // Al iniciar sesión se va a validar con el método validarSesion()
         var sesion = document.getElementById("sesion");
-        sesion.addEventListener('submit', ()=> this.#validarSesion());
+        sesion.addEventListener('submit', () => this.#validarSesion());
     }
 
 
@@ -46,7 +47,7 @@ class Sesion {
         // Recogemos los valores de usuario y contraseña del formulario.
         var userForm = document.getElementById("user").value;
         var passForm = document.getElementById("password").value;
-        // De primeras el mensaje será de no coincidencia
+        // Por defecto el mensaje será de no coincidencia
         var mensaje = "No coinciden usuario o contraseña";
         // Recorremos el array de usuarios y si coinciden cambiamos el valor del mensaje
         for (var usuario of this.#usuarios){
@@ -60,4 +61,6 @@ class Sesion {
     }
 }
 
+
+// Iniciamos un objeto de la clase Sesion (IMPORTANTE)
 new Sesion();
