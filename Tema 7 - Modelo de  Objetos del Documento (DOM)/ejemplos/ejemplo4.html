@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        function f1() {
+            var x = document.documentURI;                           // documentURI obtiene la URL de la página actual
+            document.getElementById("p1").innerHTML = " URL: " + x; // Lo muestra en el #p1
+        }
+    </script>
+
+</head>
+
+<body>
+    <button id="bot" onclick="f1()">Pulsar</button>
+    <p id="p1"></p>
+</body>
+
+</html>

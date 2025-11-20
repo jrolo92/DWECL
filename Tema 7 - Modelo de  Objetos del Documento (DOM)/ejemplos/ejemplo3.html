@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        function f1() {
+            var x = document.getElementById("bot")
+            var y = x.attributes.length; // Guarda nº de atributos del elemento referenciado (Hay dos atributos id y onclick) (attributes es un array).
+            document.getElementById("p1").innerHTML = y; // Muestra nº atributos (2).
+            var y = x.attributes[1].name;
+            document.getElementById("p1").innerHTML += "<br>" + y; // Añade nombre del atributo (muestra el nombre del 2º atributo por el .name y el [1]).
+            var y = x.attributes[1].value;
+            document.getElementById("p1").innerHTML += "<br>" + y; // Añade valor del atributo (muestra el valor del 2º atributo por el .value y el [1]).
+        }
+    </script>
+
+</head>
+
+<body>
+    <button id="bot" onclick="f1()">Pulsar</button>
+    <p id="p1"></p>
+</body>
+
+</html>
