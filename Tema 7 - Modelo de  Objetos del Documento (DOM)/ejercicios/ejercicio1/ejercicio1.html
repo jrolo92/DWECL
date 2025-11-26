@@ -13,7 +13,7 @@
 
 <body>
     <div class="container">
-        <!-- Header  -->
+        <!-- Header -->
         <div class="bg-light p-5 rounded d-flex align-items-center">
             <i class="bi bi-basket fs-1 me-3"></i>
             <h1 class="mb-0">Cesta de la compra</h1>
@@ -25,93 +25,10 @@
                 <!-- Productos -->
                 <div id="productos" class="col-md-6">
                     <h2>Productos disponibles</h2>
-                    <div class="row">
-                        <!-- Mousse -->
-                        <div class="col-md-4 mb-4">
-                            <div class="card h-100 shadow-sm">
-                                <img src="https://cdn.pixabay.com/photo/2020/09/18/21/14/dessert-5582984_1280.jpg"
-                                    class="card-img-top" alt="Mousse de Chocolate">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">Mousse</h5>
-                                    <p class="card-text">5 €</p>
-                                    <input type="number" max="999" min="1" value="1" step="1"
-                                        class="form-control d-inline-block w-100">
-                                    <button href="#" class="btn btn-primary w-100 mt-2">Añadir</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Helados -->
-                        <div class="col-md-4 mb-4">
-                            <div class="card h-100 shadow-sm">
-                                <img src="https://cdn.pixabay.com/photo/2021/01/18/12/49/ice-cream-5928048_1280.jpg"
-                                    class="card-img-top" alt="Helado">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">Helado</h5>
-                                    <p class="card-text">4 €</p>
-                                    <input type="number" max="999" min="1" value="1" step="1"
-                                        class="form-control d-inline-block w-100">
-                                    <a href="#" class="btn btn-primary w-100 mt-2">Añadir</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Magdalenas -->
-                        <div class="col-md-4 mb-4">
-                            <div class="card h-100 shadow-sm">
-                                <img src="https://cdn.pixabay.com/photo/2016/03/05/20/09/bake-1238681_1280.jpg"
-                                    class="card-img-top" alt="Magdalenas">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">Magdalenas</h5>
-                                    <p class="card-text">3 €</p>
-                                    <input type="number" max="999" min="1" value="1" step="1"
-                                        class="form-control d-inline-block w-100">
-                                    <a href="#" class="btn btn-primary w-100 mt-2">Añadir</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Galletas -->
-                        <div class="col-md-4 mb-4">
-                            <div class="card h-100 shadow-sm">
-                                <img src="https://cdn.pixabay.com/photo/2015/11/19/20/17/cookies-1051884_1280.jpg"
-                                    class="card-img-top" alt="Galletas">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">Galletas</h5>
-                                    <p class="card-text">10 €</p>
-                                    <input type="number" max="999" min="1" value="1" step="1"
-                                        class="form-control d-inline-block w-100">
-                                    <a href="#" class="btn btn-primary w-100 mt-2">Añadir</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Tarta -->
-                        <div class="col-md-4 mb-4">
-                            <div class="card h-100 shadow-sm">
-                                <img src="https://cdn.pixabay.com/photo/2020/03/10/03/49/red-velvet-cake-4917734_1280.jpg"
-                                    class="card-img-top" alt="Tarta">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">Tarta</h5>
-                                    <p class="card-text">20 €</p>
-                                    <input type="number" max="999" min="1" value="1" step="1"
-                                        class="form-control d-inline-block w-100">
-                                    <a href="#" class="btn btn-primary w-100 mt-2">Añadir</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Bizcocho -->
-                        <div class="col-md-4 mb-4">
-                            <div class="card h-100 shadow-sm">
-                                <img src="https://cdn.pixabay.com/photo/2020/04/09/21/18/biscuit-5023135_1280.jpg"
-                                    class="card-img-top" alt="Bizcocho">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">Bizcocho</h5>
-                                    <p class="card-text">12 €</p>
-                                    <input type="number" max="999" min="1" value="1" step="1"
-                                        class="form-control d-inline-block w-100">
-                                    <a href="#" class="btn btn-primary w-100 mt-2">Añadir</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Aquí se insertarán las tarjetas dinámicamente -->
+                    <div class="cards-container row" id="contenedor"></div>
                 </div>
+
                 <!-- Cesta -->
                 <div class="col">
                     <h2>Cesta</h2>
@@ -126,21 +43,30 @@
                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>id</td>
-                                <td>nombre</td>
-                                <td>cantidad</td>
-                                <td>precio</td>
-                                <td>cantidad * precio</td>
-                                <td><button class="btn btn-danger">Borrar</button></td>
-                            </tr>
+                        <tbody id="cesta">
+                            <!-- Aquí se insertarán las filas dinámicamente -->
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4" class="text-end fw-bold">Total:</td>
+                                <td id="total"> €</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="text-end fw-bold">Total + IVA (21%):</td>
+                                <td id="totalIva"> €</td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
-
             </div>
         </div>
+    <footer class="footer mt-auto py-3  fixed-bottom bg-light">
+        <div class="container">
+            <span class="text-muted">&copy; 2025 Javier Rodríguez  - DWECL - 2º DAW - Curso 25/26</span>
+        </div>
+        </footer>
     </div>
 </body>
 
