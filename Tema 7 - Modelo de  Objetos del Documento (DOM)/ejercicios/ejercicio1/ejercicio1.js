@@ -1,3 +1,4 @@
+// Cada producto del array de productos tendrá que tener esos atributos
 class Producto {
 
     constructor(codigo, nombre, precio, imagen) {
@@ -12,13 +13,15 @@ class Producto {
 class ContProducto {
     // Array que almacena los productos para mostrarlos
     #productosDisponibles = [];
+    #cesta;
 
     /*
         Al crear una instancia de esta clase se van a guardar los productos en el atributo (array)
         y se van a pintar usando el metodo mostrar()
     */
-    constructor(productos) {
+    constructor(productos, cesta) {
         this.#productosDisponibles = productos;
+        this.#cesta = cesta;
         // console.log(this.#productosDisponibles);
         this.mostrar();
     }
@@ -30,10 +33,10 @@ class ContProducto {
         /* Recorremos cada producto, usamos el método crearProducto() 
             para crear una tarjeta para cada producto y la añadimos al html
         */
-        this.#productosDisponibles.forEach(producto => {
-            var nuevaTarjeta = this.crearProducto(producto);
-            contenedor.appendChild(nuevaTarjeta);
-        });
+        for (var producto of this.#productosDisponibles) {
+        var nuevaTarjeta = this.crearProducto(producto);
+        contenedor.appendChild(nuevaTarjeta);
+    }
     }
 
     /*
@@ -80,10 +83,8 @@ class ContProducto {
         boton.textContent = "Añadir a cesta";
         boton.className = "btn btn-primary w-100";
 
-        // Creamos un evento con el que al hacer click en el botón de añadir se conecte con la cesta y lo añada
-        boton.addEventListener("click", function() {
-            cesta.añadir(producto, parseInt(cantidad.value));
-        });
+        // Creamos un evento con el que al hacer click en el botón de añadir va a usar la isntancia de cesta para ejecutar su método añadir()
+        boton.addEventListener("click", () => this.#cesta.añadir(producto, parseInt(cantidad.value)));
 
         // Añadimos los elementos al cuerpo en el orden que queremos que se muestre
         cuerpo.appendChild(nombre);
@@ -111,17 +112,32 @@ class Cesta {
 
 
     añadir(producto, cantidad) {
-        // Creamos un nuevo objeto con los datos del producto
-        var productoAñadir = {
-            codigo: producto.codigo,
-            nombre: producto.nombre,
-            precio: producto.precio,
-            imagen: producto.imagen,
-            cantidad: cantidad
-        };
+        var prodExistente = null;
 
-        // Lo agregamos a la cesta y lo pintamos en ella con el método mostrar()
-        this.#productosAñadidos.push(productoAñadir);
+        // Recorremos el array buscando si ya existe el producto
+        for (var i = 0; i < this.#productosAñadidos.length; i++) {
+            if (this.#productosAñadidos[i].codigo === producto.codigo) {
+                prodExistente = this.#productosAñadidos[i];
+                break; 
+            }
+        }
+
+        if (prodExistente) {
+            prodExistente.cantidad += cantidad;
+        } else {
+            // Creamos un nuevo objeto con los datos del producto
+            var productoAñadir = {
+                codigo: producto.codigo,
+                nombre: producto.nombre,
+                precio: producto.precio,
+                imagen: producto.imagen,
+                cantidad: cantidad
+            };
+
+            // Lo agregamos a la cesta
+            this.#productosAñadidos.push(productoAñadir);
+        }
+        // Lo repintamos en la cesta
         this.mostrar();
     }
 
@@ -132,15 +148,17 @@ class Cesta {
         // Borramos la tabla antes de volver a pintar para evitar que se pinten los productos anteriores
         filaCesta.innerHTML = "";
 
+        // Creamos la vv total para mostrar al final de la cesta y la inicializamos
         var total = 0;
 
         /* 
             Recorremos el array de productos de la cesta y crea una fila para cada uno.
             Para cada celda creamos un elemento y lo vamos añadiendo a la fila
         */
-        this.#productosAñadidos.forEach(producto => {
+       for (const producto of this.#productosAñadidos) {
             var fila = document.createElement("tr");
 
+            // Creamos la variable subtotal para mostrarla en el elemento correspondiente mas abajo
             var subtotal = producto.precio * producto.cantidad;
             total += subtotal;
             
@@ -175,17 +193,15 @@ class Cesta {
             botonEliminar.textContent = "Eliminar";
             botonEliminar.className = "btn btn-danger btn-sm";
 
-            // Evento para eliminar un producto
-            botonEliminar.addEventListener("click", () => {
-                this.eliminar(producto.codigo);
-            });
+            // Evento para eliminar un producto usando el método eliminar de la clase cesta
+            botonEliminar.addEventListener("click", () => this.eliminar(producto.codigo));
 
             celdaBoton.appendChild(botonEliminar);
             fila.appendChild(celdaBoton);
 
             // Finalmente añadimos la fila completa a la tabla
             filaCesta.appendChild(fila);
-        });
+        };
 
         // Actualizamos el total y el total+IVA
         document.getElementById("total").textContent = total + " €";
@@ -205,7 +221,6 @@ class Cesta {
     }
 }
 
-
 // Productos disponibles:
 var productos = [
     { codigo: 1, nombre: "Mousse", precio: 5, imagen: "https://cdn.pixabay.com/photo/2020/09/18/21/14/dessert-5582984_1280.jpg" },
@@ -217,5 +232,5 @@ var productos = [
 ];
 
 // Crear la instancia de ContenedorProducto y de Cesta
-new ContProducto(productos);
-var cesta = new Cesta();
+new ContProducto(productos, new Cesta());
+// var cesta = new Cesta();
