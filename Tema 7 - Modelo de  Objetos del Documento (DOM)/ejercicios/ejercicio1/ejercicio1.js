@@ -7,6 +7,7 @@ class Producto {
         this.precio = precio;
         this.imagen = imagen;
     }
+
 }
 
 // Todo lo que sea mostrar productos
@@ -19,11 +20,17 @@ class ContProducto {
         Al crear una instancia de esta clase se van a guardar los productos en el atributo (array)
         y se van a pintar usando el metodo mostrar()
     */
-    constructor(productos, cesta) {
-        this.#productosDisponibles = productos;
-        this.#cesta = cesta;
+    constructor() {
+        this.crearArrayProductos(productos);
+        this.#cesta = new Cesta();
         // console.log(this.#productosDisponibles);
         this.mostrar();
+    }
+
+    crearArrayProductos(productos) {
+        for (var p of productos) {
+            this.#productosDisponibles.push(new Producto(p.codigo, p.nombre, p.precio, p.imagen));
+        }
     }
 
     mostrar() {
@@ -36,7 +43,7 @@ class ContProducto {
         for (var producto of this.#productosDisponibles) {
         var nuevaTarjeta = this.crearProducto(producto);
         contenedor.appendChild(nuevaTarjeta);
-    }
+        }
     }
 
     /*
@@ -115,10 +122,18 @@ class Cesta {
         var prodExistente = null;
 
         // Recorremos el array buscando si ya existe el producto
-        for (var i = 0; i < this.#productosAñadidos.length; i++) {
-            if (this.#productosAñadidos[i].codigo === producto.codigo) {
-                prodExistente = this.#productosAñadidos[i];
-                break; 
+        // for (var i = 0; i < this.#productosAñadidos.length; i++) {
+        //     if (this.#productosAñadidos[i].codigo === producto.codigo) {
+        //         prodExistente = this.#productosAñadidos[i];
+        //         break; 
+        //     }
+        // }
+
+        // Recorremos el array buscando si ya existe el producto
+        for (const p of this.#productosAñadidos) {
+            if (p.codigo === producto.codigo) {
+            prodExistente = p;
+            break;
             }
         }
 
@@ -228,9 +243,8 @@ var productos = [
     { codigo: 3, nombre: "Magdalenas", precio: 3, imagen: "https://cdn.pixabay.com/photo/2016/03/05/20/09/bake-1238681_1280.jpg" },
     { codigo: 4, nombre: "Galletas", precio: 10, imagen: "https://cdn.pixabay.com/photo/2015/11/19/20/17/cookies-1051884_1280.jpg" },
     { codigo: 5, nombre: "Tarta", precio: 20, imagen: "https://cdn.pixabay.com/photo/2020/03/10/03/49/red-velvet-cake-4917734_1280.jpg" },
-    { codigo: 6, nombre: "Bizcocho", precio: 12, imagen: "https://cdn.pixabay.com/photo/2020/04/09/21/18/biscuit-5023135_1280.jpg" },
+    { codigo: 6, nombre: "Bizcocho", precio: 12, imagen: "https://cdn.pixabay.com/photo/2020/04/09/21/18/biscuit-5023135_1280.jpg" }
 ];
 
 // Crear la instancia de ContenedorProducto y de Cesta
-new ContProducto(productos, new Cesta());
-// var cesta = new Cesta();
+new ContProducto();
