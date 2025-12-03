@@ -119,15 +119,27 @@ class Cesta {
         this.recuperarDatos();
     }
 
+    /*
+        Convierte el array de los productos de la cesta en una cadena JSON y
+        la almacena en el almacenamiento local del navegador
+    */
     guardarDatos(){
-        localStorage.clear();
         let cadenaJSON=JSON.stringify(this.#productosAñadidos);
         localStorage.setItem("productosCesta", cadenaJSON);
     }
 
+    /*
+        Recupera los datos de la cesta que se habian quedado guardados en el almacenamiento local
+        y los muestra en pantalla
+    */
     recuperarDatos(){
         let productos = localStorage.getItem("productosCesta");
-        this.#productosAñadidos = JSON.parse(productos);
+        if (productos){
+            this.#productosAñadidos = JSON.parse(productos);
+        } else {
+            this.#productosAñadidos= [];
+        }
+
         this.mostrar();
     }
 
@@ -135,7 +147,7 @@ class Cesta {
         var prodExistente = null;
 
         // Recorremos el array buscando si ya existe el producto
-        for (const p of this.#productosAñadidos) {
+        for (let p of this.#productosAñadidos) {
             if (p.codigo === producto.codigo) {
             prodExistente = p;
             break;
@@ -158,6 +170,9 @@ class Cesta {
             this.#productosAñadidos.push(productoAñadir);
 
         }
+        // guardamos datos en localstorage
+        this.guardarDatos();
+
         // Lo repintamos en la cesta
         this.mostrar();
 
@@ -224,8 +239,6 @@ class Cesta {
             // Finalmente añadimos la fila completa a la tabla
             filaCesta.appendChild(fila);
 
-            // Llamar a los métodos de guardar datos y recuperar datos
-            this.guardarDatos();
         };
 
         // Actualizamos el total y el total+IVA
@@ -240,6 +253,9 @@ class Cesta {
                 break;
             }
         }
+
+        // guardamos datos en localstorage
+        this.guardarDatos();
 
         // Repintamos la cesta
         this.mostrar();
