@@ -115,19 +115,24 @@ class Cesta {
     // Array de productos añadidos a la cesta
     #productosAñadidos = [];
 
-    constructor() { }
+    constructor() {
+        this.recuperarDatos();
+    }
 
+    guardarDatos(){
+        localStorage.clear();
+        let cadenaJSON=JSON.stringify(this.#productosAñadidos);
+        localStorage.setItem("productosCesta", cadenaJSON);
+    }
+
+    recuperarDatos(){
+        let productos = localStorage.getItem("productosCesta");
+        this.#productosAñadidos = JSON.parse(productos);
+        this.mostrar();
+    }
 
     añadir(producto, cantidad) {
         var prodExistente = null;
-
-        // Recorremos el array buscando si ya existe el producto
-        // for (var i = 0; i < this.#productosAñadidos.length; i++) {
-        //     if (this.#productosAñadidos[i].codigo === producto.codigo) {
-        //         prodExistente = this.#productosAñadidos[i];
-        //         break; 
-        //     }
-        // }
 
         // Recorremos el array buscando si ya existe el producto
         for (const p of this.#productosAñadidos) {
@@ -151,9 +156,11 @@ class Cesta {
 
             // Lo agregamos a la cesta
             this.#productosAñadidos.push(productoAñadir);
+
         }
         // Lo repintamos en la cesta
         this.mostrar();
+
     }
 
 
@@ -216,6 +223,9 @@ class Cesta {
 
             // Finalmente añadimos la fila completa a la tabla
             filaCesta.appendChild(fila);
+
+            // Llamar a los métodos de guardar datos y recuperar datos
+            this.guardarDatos();
         };
 
         // Actualizamos el total y el total+IVA
@@ -233,6 +243,7 @@ class Cesta {
 
         // Repintamos la cesta
         this.mostrar();
+
     }
 }
 
