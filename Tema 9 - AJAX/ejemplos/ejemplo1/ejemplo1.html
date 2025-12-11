@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<meta charset="UTF-8">
+
+<!-- Script para leer propiedades de un archivo JSON -->
+<body>
+    <button type="button" onclick="funAjax ()">Leer propiedad de archivo JSON</button>
+    <div id="datos"> </div>     <!-- Aquí se va a mostrar la propiedad escogida del JSON -->
+    <script>
+        function funAjax() {    
+            var xhttp = new XMLHttpRequest();           // Crea un objeto para realizar las peticiones HTTP para solicitar la propiedad
+            xhttp.onreadystatechange = function () {                    // Define una funcion que se llama cuando hay un cambio de estado en la petición
+                if (this.readyState == 4 && this.status == 200) {
+                    let obj = JSON.parse(this.responseText);            //responseText: Devuelve el resultado en forma de cadena
+                    document.getElementById("datos").innerHTML = obj[0].nombre;
+                }
+            }
+            // open(method, url, async, user(opcional), psw(opcional))
+            xhttp.open("GET", "carteras.json", true);       // Abre petición (el true hace posible que se envíe en segundo plano, es decir de forma asíncrona)
+            xhttp.send();                                   // Y la lanza
+        }
+    </script>
+</body>
+
+</html>
