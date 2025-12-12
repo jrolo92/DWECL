@@ -11,7 +11,8 @@
     /*
         En función de si disponemos del parámetro nos va a devolver una cosa u otra
     */
-    if ($nombreID === null) {
+        
+    if ($nombreID == "") {
         // Consulta SQL
         $sql1 = "SELECT id, nombre FROM datos";
         // Ejecutamos consulta
