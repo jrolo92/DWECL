@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+table,th,td {
+  border : 1px solid black;
+  border-collapse: collapse;
+}
+th,td {
+  padding: 5px;
+}
+
+</style>
+<script>
+    function funAjax(param,fun) {
+        if(param!="Selecciona un nombre"){
+            let xhttp;  
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {    
+                    let obj = JSON.parse(xhttp.responseText);   
+                    fun(obj);
+                }
+            }
+            xhttp.open("GET", 'tarea1Tema9.php?nombreID='+param, true);
+            xhttp.send();
+        }
+    }
+    
+    function cargaTabla(obj){ // Rellena la tabla de datos del nombre seleccionado en el SELECT
+       
+            let tabla=` <table>
+                        <tr><th>ID</th>
+                        <td>${obj.id} </td></tr>
+                        <tr><th>Nombre</th>
+                        <td>${obj.nombre}</td></tr>
+                        <tr><th>Apellidos</th>
+                        <td>${obj.apellidos}</td></tr>
+                        <tr><th>Ciudad</th>
+                        <td> ${obj.ciudad} </td></tr>
+                        </table>`
+         document.getElementById("cont").innerHTML = tabla; // Vuelca datos en el contenedor identificado.
+    }
+    function carga(obj){ // Rellena el SELECT con los datos obtenidos de la BBDD
+       
+        let sele=document.getElementById("sel");
+        sele.addEventListener("change",function(){funAjax(this.value,cargaTabla)});
+        let op=document.createElement("option");
+        op.innerHTML="Selecciona un nombre";
+        sele.appendChild(op);
+        for(let i of obj ){      
+                op=document.createElement("option");
+                op.setAttribute("value",i.id);
+                op.innerHTML=i.nombre;
+                sele.appendChild(op);      
+        }
+    
+    }
+    
+    window.onload=function (){funAjax('',carga)}
+    
+</script>
+</head>
+<body>
+    <h2>Tarea 1 Tema 9.</h2>
+    <form action=""> 
+        <select id='sel'>
+        </select>
+    </form>
+    <br>
+    <div id="cont">La tabla se cargará aquí...</div>
+</body>
+</html>
