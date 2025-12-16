@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX Avanzado: Inserción y Recarga</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .data-table th, .data-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        .data-table th { background-color: #f2f2f2; }
+        #mensajeFeedback { padding: 10px; margin-bottom: 20px; border: 1px solid; }
+        .success { border-color: green; color: green; background-color: #e6ffe6; }
+        .error { border-color: red; color: red; background-color: #ffe6e6; }
+    </style>
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <h1>1. Insertar Nuevo Usuario</h1>
+    
+    <div id="mensajeFeedback"></div>
+
+    <form id="formulario">
+        <label>Nombre: <input type="text" name="nombre" required></label><br><br>
+        <label>Apellidos: <input type="text" name="apellidos" required></label><br><br>
+        <label>Ciudad: <input type="text" name="ciudad" required></label><br><br>
+        <button type="submit">Insertar y Recargar Lista</button>
+    </form>
+
+    <hr>
+
+    <h1>2. Lista de Usuarios (Actualización Dinámica)</h1>
+    <div id="listaUsuarios">
+        Cargando datos iniciales...
+    </div>
+
+
+</body>
+</html>
