@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <script type="module">
+
+            const ruta = './exportSuma.js'; 
+
+            // Importación estática.
+            //Necesita type="module" en la etiqueta script.
+            import {suma} from './exportSuma.js';
+            console.log(suma(1,2));
+
+
+            // Importación dinámica. Primera forma.
+            //No necesita type="module" en la etiqueta script.
+            async function carga() {
+            let  sum = await import (ruta);
+            console.log(sum.suma(1,2));
+            }
+            carga();
+
+            // Importación dinámica. Segunda forma.
+            //Necesita type="module" en la etiqueta script.
+            const mod = await import(ruta);
+            console.log(mod.suma(1, 2));
+            
+        </script>
+    </body>
+</html>
