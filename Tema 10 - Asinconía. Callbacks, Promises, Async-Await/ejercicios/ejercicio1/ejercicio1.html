@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consulta AJAX</title>
-    <script type="module" src="script.js" defer></script>
+    <!-- Importamos el modulo 2 y ejecutamos el método para cargar los nombres-->
+    <script type="module">
+        const ruta = './modulo2.js';
+        const mod = await import(ruta);
+        mod.cargarNombres();
+    </script>
 </head>
 <body>
     <h2>Tarea 1 Tema 10</h2>
