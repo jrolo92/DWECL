@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta AJAX</title>
+    <!-- Importamos el modulo 2 y ejecutamos el método para cargar los nombres-->
+    <script type="module">
+        const ruta = './modulo2.js';
+        const mod = await import(ruta);
+        mod.cargarNombres();
+    </script>
+    <!-- Importamos la libreria de JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <h2>Tarea 1 Tema 11</h2>
+    <form action="">
+        <select id="sel">
+            
+        </select>
+    </form>
+    <br>
+    <div id="cont">La tabla se cargará aquí...</div>
+</body>
+</html>
