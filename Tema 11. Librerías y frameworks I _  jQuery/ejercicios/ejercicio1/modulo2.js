@@ -1,5 +1,6 @@
 /*
-    Importamos el módulo de la funcion AJAX ya que la voy a necesitar en las funciones de este módulo
+    Importamos el módulo de la funcion AJAX ya que la voy a necesitar 
+    en las funciones de este módulo
 */
 import {funAjax} from './modulo1.js';
 

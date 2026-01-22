@@ -1,0 +1,17 @@
+Indefinido: aun no se le ha asignado el tipo.
+Null: es de tipo nulo.
+
+Crear archivo configuración en cada proyecto (tsconfig.json): 
+	tsc --init
+	Cambiar la config: "module" = "ES2020", "target" = "ES2020",
+
+Compilar:
+	tsc url/nombreArchivo.ts
+	tsc -w -> Compila los cambios automáticamente
+
+Decoradores (@nombre):
+	Cambiar la config: "experimentalDecorators": true, "emitDecoratorMetadata": true
+
+Usar librería JQuery: 
+	npm install --save-dev @types/jQuery
+	Cambiar la config: "types" = ["jquery"],
