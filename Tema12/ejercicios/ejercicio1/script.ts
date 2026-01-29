@@ -9,7 +9,8 @@ class GrupoBot implements Botones{
     contador: number = 0;
 
     constructor(){
-        $("#añade").on("click", () =>this.add());
+        $("#añade").on("click", () => this.add());
+        $("#quita").on("click", () => this.rest());
     }
 
     add(): void {
@@ -18,7 +19,10 @@ class GrupoBot implements Botones{
     }
 
     rest(): void {
-
+        if (this.contador > 0){
+            $("#botones button").last().remove();
+            this.contador --;
+        }
     }
 }
 
