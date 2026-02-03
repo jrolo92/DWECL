@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <script>
+        // Esperamos a que cargue todo el html
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Tomamos la referencia de los elementos
+            const boton = document.getElementById('btn');
+            const contenedor = document.getElementById('cont')
+
+            // Evento al hacer click en el botón
+            boton.addEventListener('click', () => {
+                // Petición AJAX por GET usando Promesas
+                fetch('/pagAjax')
+                    .then(respuesta => {
+                        // Devuelve el JSON parseado
+                        return respuesta.json();
+                    })
+                    .then(datos => {
+                        // Imprimimos el nombre y apellido en el contenedor
+                        contenedor.innerHTML = `Hola ${datos.nombre} ${datos.apellido}`;
+                    })
+                    // Control de error de conexión con el servidor
+                    .catch (error => {
+                        console.error("Error al obtener el JSON:", error);
+                        contenedor.innerHTML = "Error al conectar con el servidor node";
+                    });
+            });
+        });
+            
+    </script>
+    <body>
+        <h2>Tarea 1 - Tema 13</h2>
+        <button id="btn">Pulsar</button>
+        <div id="cont"></div>
+    </body>
+</html>
