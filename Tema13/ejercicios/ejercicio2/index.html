@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // vv necesarias: apuntan a los elementos con lo que vamos a trabajar
+        const inputNombre = document.getElementById('nombre');
+        const inputApellido = document.getElementById('apellido');
+        const btnAñadir = document.getElementById('btnAñadir');
+        const lista = document.getElementById('lista');
+
+        // Creamos una función para listar
+        function listar () {
+            fetch('/usuarios')
+                .then(res => res.json())
+                .then(datos => {
+                    var contenidoHTML = "";
+
+                    // recorremos los datos y creamos un parrafo por cada uno
+                    for (let usuario of datos) {
+                        contenidoHTML += `<p> ${usuario.nombre} ${usuario.apellido}</p>`;
+                    }
+
+                    // Se lo añadimos al contenedor de la lista
+                    lista.innerHTML = contenidoHTML;
+                })
+                // Control de error de conexión con el servidor
+                .catch (error => {
+                    console.error("Error al listar: ", error);
+                });
+        }
+
+        // Evento para el botón de añadir
+        btnAñadir.addEventListener('click', () => {
+            const dataEnviar = {
+                nombre: inputNombre.value,
+                apellido: inputApellido.value
+            };
+
+            // Enviamos los datos por post
+            fetch('/nuevo', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json'},
+                body: JSON.stringify(dataEnviar)
+            })
+            .then(res =>res.json())
+            .then(respuesta => {
+                // Mostrar el mensaje de éxito
+                console.log(respuesta);
+                // Limpiamos los inputs
+                inputNombre.value = "";
+                inputApellido.value = "";
+                // Volvemos a listar tras la inserción del nuevo registro
+                listar();
+            })
+            .catch (error => {
+                console.error('Error al añadir: ', error);
+            });
+        });
+
+    });
+</script>
+<body>
+    <h2>Gestión de Usuarios</h2>
+    
+    <input type="text" id="nombre" placeholder="Nombre">
+    <input type="text" id="apellido" placeholder="Apellido">
+    <button id="btnAñadir">Añadir y Listar</button>
+
+    <div id="lista"></div>
+</body>
+</html>
