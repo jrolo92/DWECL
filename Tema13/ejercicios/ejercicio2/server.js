@@ -24,7 +24,7 @@ router.get('/usuarios', async (req, res) => {
     const db = client.db(nombreDb);
     const usuarios = await db.collection('usuarios').find({}).toArray();
     res.json(usuarios);
-
+    
 });
 
 // Ruta para añadir nuevo usuario
