@@ -7,15 +7,22 @@
 </head>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> ff43cb03ba976ff15930aac29db326509938eec0
         // vv necesarias: apuntan a los elementos con lo que vamos a trabajar
         const inputNombre = document.getElementById('nombre');
         const inputApellido = document.getElementById('apellido');
         const btnAñadir = document.getElementById('btnAñadir');
         const lista = document.getElementById('lista');
 
+        listar();
+
         // Creamos una función para listar
         function listar () {
+            // Petición AJAX por get usando promesas
             fetch('/usuarios')
                 .then(res => res.json())
                 .then(datos => {
@@ -37,6 +44,12 @@
 
         // Evento para el botón de añadir
         btnAñadir.addEventListener('click', () => {
+            // Controlamos que los campos no estén vacíos
+            if (inputNombre == "" || inputApellido == "") {
+                alert("Los campos no pueden estar vacíos")
+                return;
+            }
+
             const dataEnviar = {
                 nombre: inputNombre.value,
                 apellido: inputApellido.value
@@ -68,8 +81,8 @@
 <body>
     <h2>Gestión de Usuarios</h2>
     
-    <input type="text" id="nombre" placeholder="Nombre">
-    <input type="text" id="apellido" placeholder="Apellido">
+    <input type="text" id="nombre" placeholder="Nombre">Nombre</input>
+    <input type="text" id="apellido" placeholder="Apellido">Apellido</input>
     <button id="btnAñadir">Añadir y Listar</button>
 
     <div id="lista"></div>
