@@ -1,0 +1,17 @@
+{
+  "name": "practica_examen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@types/jquery": "^3.5.33",
+    "typescript": "^5.9.3"
+  }
+}
