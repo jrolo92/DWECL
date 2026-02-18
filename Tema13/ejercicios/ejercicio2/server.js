@@ -22,7 +22,8 @@ router.get('/usuarios', async (req, res) => {
 
     await client.connect();
     const db = client.db(nombreDb);
-    const usuarios = await db.collection('usuarios').find({}).toArray();
+    // Consulta todos los datos y los devuelve en forma de array
+    const usuarios = await db.collection('usuarios').find().toArray();
     res.json(usuarios);
     
 });
