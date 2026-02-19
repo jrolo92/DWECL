@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Examen Final DWEC</title>
+    <style>
+        .tarjeta {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Buscador de Empleados</h2>
+
+    <form id="formularioBusqueda">
+        <input type="text" id="inputBusqueda" placeholder="Busca por nombre...">
+        <button type="submit">Buscar</button>
+    </form>
+
+    <div id="mensajeError" style="color: red; margin-top: 10px;"></div>
+
+    <div id="contenedorTarjetas"></div>
+
+    <script>
+        class Usuario {
+
+            constructor(nombre, email, ciudad) {
+                this.nombre = nombre;
+                this.email = email;
+                this.ciudad = ciudad;
+            }
+
+            renderizar() {
+                let tarjeta = document.createElement('div');
+                tarjeta.className = 'tarjeta';
+                tarjeta.innerHTML =
+                    `<h2>${this.nombre}</h2>
+                    <p>Email: ${this.email}</p>
+                    <p>Ciudad: ${this.ciudad}</p>`;
+
+                return tarjeta;
+
+            }
+        }
+
+        async function buscarUsuarios(termino) {
+            try {
+                let conexion = await fetch('https://jsonplaceholder.typicode.com/users');
+
+                let parseo = await conexion.json();
+
+                let busqueda = parseo.filter(user => user.name.toLowerCase().includes(termino.toLowerCase()));
+
+                let contTarjetas = document.getElementById('contenedorTarjetas');
+                for (let user of busqueda) {
+                    let nuevoUsuario = new Usuario(user.name, user.email, user.address.city);
+                    let tarjeta = nuevoUsuario.renderizar();
+                    console.log(tarjeta);
+                    contTarjetas.appendChild(tarjeta);
+                }
+            } catch(e) {
+                console.log('Error: ', e);
+            }
+        }
+
+        let formulario = document.getElementById('formularioBusqueda');
+        let input = document.getElementById('inputBusqueda');
+        let divError = document.getElementById('mensajeError');
+        let contenedorTarjetas = document.getElementById('contenedorTarjetas');
+
+        formulario.addEventListener("submit", (e) => {
+            e.preventDefault();
+            contenedorTarjetas.innerHTML = '';
+            divError.innerHTML = '';
+
+            if (input.value.trim() == '') {
+                divError.innerText = 'Debes introducir un nombre';
+            } else {
+                buscarUsuarios(input.value);
+            }
+        });
+
+
+    </script>
+</body>
+
+</html>

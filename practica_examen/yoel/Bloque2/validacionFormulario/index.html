@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validación Formulario</title>
+</head>
+
+<body>
+    <form id="miFormulario">
+        <label>Usuario:</label>
+        <input type="text" id="usuario" name="usuario">
+
+        <label>Contraseña:</label>
+        <input type="password" id="pass" name="pass">
+
+        <button type="submit" id="btnEnviar">Registrar</button>
+    </form>
+    <div id="mensajeError" style="color: red;"></div>
+
+    <script>
+        let usuario = document.getElementById('usuario');
+        let contrasena = document.getElementById('pass');
+        let form = document.getElementById('miFormulario');
+        let div = document.getElementById('mensajeError');
+
+        form.addEventListener('submit', (e) => {
+            div.innerText = '';
+            if (usuario.value == '') {
+                div.innerHTML += 'Debes rellenar el usuario\n';
+                e.preventDefault();
+            }
+            if (contrasena.value == '') {
+                div.innerHTML += 'Debes introducir una contraseña';
+                e.preventDefault();
+
+            }
+            
+        });
+    </script>
+</body>
+
+</html>

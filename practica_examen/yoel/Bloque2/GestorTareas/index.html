@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestor de Tareas</title>
+</head>
+<body>
+    <h2>Mis Tareas</h2>
+    
+    <input type="text" id="nuevaTarea" placeholder="Escribe una tarea...">
+    <button id="btnAnadir">Añadir Tarea</button>
+
+    <ul id="listaTareas"></ul> 
+
+    <script>
+        let input = document.getElementById('nuevaTarea');
+        let boton = document.getElementById('btnAnadir');
+        let lista = document.getElementById('listaTareas');
+
+        boton.addEventListener('click', () => {
+            if (input.value == '') {
+                alert('Debes escribir algo');
+            } else {
+                let tarea = document.createElement('li');
+                tarea.innerText = input.value;
+                if (tarea.innerText.includes('urgente')) {
+                    tarea.style.color = "red";
+                }
+
+                lista.appendChild(tarea);
+            }
+            input.value = '';
+        });
+    </script>
+</body>
+</html>

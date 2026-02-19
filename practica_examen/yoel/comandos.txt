@@ -1,0 +1,4 @@
+npm install express
+npm install http
+tsc --init
+tsc tarea.ts --target ES2015 -w

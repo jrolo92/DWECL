@@ -1,0 +1,29 @@
+TEMA 11 - jQuery
+
+	- Enlace librería
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+TEMA 12 - TypeScript
+
+	- Crear archivo configuración en cada proyecto (tsconfig.json): 
+		tsc --init
+		Cambiar la config: "module" = "ES2020", "target" = "ES2020",
+
+	- Compilar:
+		tsc url/nombreArchivo.ts
+
+	- Usar librería JQuery en TypeScript: 
+		npm install --save-dev @types/jQuery
+		Cambiar la config: "types" = ["jquery"],
+
+TEMA 13 - Node.js
+
+	- Crear archivo de configuración del server:
+		npm init
+
+	- Lanzar server:
+		node server.js
+
+	- Instalar express:
+		npm install express
