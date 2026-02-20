@@ -1,95 +1,61 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
-    return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (g && (g = 0, op[0] && (_ = 0)), _) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-var Articulos = /** @class */ (function () {
-    function Articulos() {
-        var _this = this;
+"use strict";
+class Articulos {
+    constructor() {
+        // Vv necesarias
         this.urlGet = "http://localhost:3000/getArticulos";
         this.urlPush = "http://localhost:3000/pushArticulos";
-        $("#bot").on("click", function () {
+        // Cargar los artículos ya guardados
+        this.getArticulos();
+        // Evento para guardar los valores del formulario en el server
+        $("#f1").on("submit", (e) => {
             try {
-                _this.pushArticulo();
+                e.preventDefault();
+                this.pushArticulo();
             }
             catch (e) {
                 console.error(e);
             }
         });
     }
-    Articulos.prototype.pushArticulo = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var codigo, col, piel, urlFinal, response, datos;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        codigo = $("#cod").val();
-                        col = $("#color").val();
-                        piel = $("#piel").val();
-                        urlFinal = "".concat(this.urlPush, "?cod=").concat(codigo, "&color=").concat(col, "&piel=").concat(piel);
-                        return [4 /*yield*/, fetch(urlFinal)];
-                    case 1:
-                        response = _a.sent();
-                        return [4 /*yield*/, response.json()];
-                    case 2:
-                        datos = _a.sent();
-                        this.getArticulos();
-                        return [2 /*return*/];
-                }
+    async pushArticulo() {
+        // Apuntamos a los valores de los campos
+        let codigo = $("#cod").val();
+        let col = $("#color").val();
+        let piel = $("#piel").val();
+        // Construimos la url a enviar al servidor
+        const urlFinal = `${this.urlPush}?cod=${codigo}&color=${col}&piel=${piel}`;
+        const response = await fetch(urlFinal);
+        if (response.ok) {
+            await response.json();
+            // Limpiamos el formulario
+            $("#f1")[0].reset();
+            // Actualizamos la tabla
+            this.getArticulos();
+        }
+    }
+    async getArticulos() {
+        // Esperamos a que se acceda a los productos y los guardamos en un array de tipo Art
+        const response = await fetch(this.urlGet);
+        const articulos = await response.json();
+        // Apuntamos al cuerpo de la tabla
+        const tbody = document.getElementById('carteras');
+        if (tbody) {
+            // Limpiamos el contenido previo
+            tbody.innerHTML = "";
+            // Generamos el HTML completo en una variable string
+            let fila = "";
+            articulos.forEach((o) => {
+                fila += `<tr>
+                    <td>${o.id}</td>
+                    <td>${o.cod}</td>
+                    <td>${o.color}</td>
+                    <td>${o.piel}</td>
+                </tr>`;
             });
-        });
-    };
-    Articulos.prototype.getArticulos = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                fetch(this.urlGet)
-                    .then(function (result) { return result.json(); })
-                    .then(function (obj) {
-                    var tbody = document.getElementById('carteras');
-                    if (tbody) {
-                        tbody.innerHTML = "";
-                        obj.forEach(function (o) {
-                            var fila = "<tr>\n                                    <td>".concat(o.id, "</td>\n                                    <td>").concat(o.cod, "</td>\n                                    <td>").concat(o.color, "</td>\n                                    <td>").concat(o.piel, "</td>\n                                </tr>");
-                            tbody.innerHTML += fila;
-                        });
-                    }
-                })
-                    .catch(function (e) { return console.log("Error capturado: ".concat(e)); });
-                return [2 /*return*/];
-            });
-        });
-    };
-    return Articulos;
-}());
+            // añadimos la fila al body de la tabla
+            tbody.innerHTML = fila;
+        }
+    }
+}
 new Articulos();
+//# sourceMappingURL=index.js.map
