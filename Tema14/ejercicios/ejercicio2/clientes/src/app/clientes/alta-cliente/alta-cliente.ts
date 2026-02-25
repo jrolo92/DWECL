@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ClientesService } from './../clientes-service';
 import { Cliente, Grupo } from './../cliente.model';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-alta-cliente',

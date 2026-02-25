@@ -40,7 +40,7 @@
         // Evento para el botón de añadir
         btnAñadir.addEventListener('click', () => {
             // Controlamos que los campos no estén vacíos
-            if (inputNombre == "" || inputApellido == "") {
+            if (inputNombre.value == "" || inputApellido.value == "") {
                 alert("Los campos no pueden estar vacíos")
                 return;
             }
