@@ -1,0 +1,16 @@
+.trail-card {
+
+  margin: 10px;
+  height: 90%;
+  width: 100%; 
+}
+
+img[mat-card-image] {
+  height: 200px;
+  object-fit:contain; 
+}
+
+button {
+  display:flex;
+  margin:auto;
+}

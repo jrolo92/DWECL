@@ -1,0 +1,39 @@
+<div class="form-container">
+  <h2>Formulario de Contacto para Corredores</h2>
+  <form class="trail-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Club / Federación</mat-label>
+      <input matInput placeholder="Ej. Club de Montaña Trail">
+    </mat-form-field>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Apellidos</mat-label>
+        <input matInput>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Dirección Postal</mat-label>
+      <textarea matInput placeholder="Calle, número, piso..."></textarea>
+    </mat-form-field>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Ciudad</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Código Postal</mat-label>
+        <input matInput #postalCode maxlength="5" placeholder="94043">
+        <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <button mat-flat-button color="primary" type="submit">Enviar Consulta</button>
+  </form>
+</div>

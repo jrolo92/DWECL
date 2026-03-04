@@ -1,0 +1,15 @@
+.trail-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 20px;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px; 
+}
+
+.full-width {
+  width: 100%;
+}
